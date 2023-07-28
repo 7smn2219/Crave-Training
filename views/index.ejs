@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Management System</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <div id="header">
+        <nav>
+            <div class="container d-flex justify-between">
+                <a class="nav-brand text-light" href="/">Car Management</a>
+
+            </div>
+        </nav>
+    </div>
+
+    <div id="site-main">
+        <div class="container">
+            <div class="box-nav">
+                <a href="/add" class="btn">Add New Car</a>
+            </div>
+            <br><br>
+
+            <table class="table">
+                <thead>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Model</th>
+                            <th>Price</th>
+                            <th>Color</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% cars.forEach((car) => { %>
+                            <tr id="car-<%= car.id %>">
+                                <td>
+                                    <%= car.id %>
+                                </td>
+                                <td>
+                                    <%= car.model %>
+                                </td>
+                                <td>
+                                    <%= car.price %>
+                                </td>
+                                <td>
+                                    <%= car.color %>
+                                </td>
+                                <td>
+                                    <a href="/update/<%= car.id %>">Update</a>
+                                    <a href="#" class="btn-delete" onclick="deleteCar(`<%= car.id %>`)">Delete</a>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function deleteCar(carId) {
+            fetch(`/delete/${carId}`, {
+                    method: 'DELETE'
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        const carRow = document.getElementById(`car-${carId}`);
+                        carRow.remove(); // Remove the row from the table.
+                    } else {
+                        throw new Error('Car not found.');
+                    }
+                })
+                .catch((error) => alert('Error deleting car: ' + error.message));
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Car</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <div id="header">
+        <nav>
+            <div class="container d-flex justify-between">
+                <a class="nav-brand text-light" href="/">Car Management</a>
+                <div class="box-nav">
+                    <a href="/" class="btn">Go Back</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div id="site-main">
+        <div class="container new_car">
+            <h2 class="form-title">Update Car</h2>
+            <form method="POST" action="/update/<%= car.id %>">
+                <div class="form-group">
+                    <label for="model">Model:</label>
+                    <input type="text" name="model" value="<%= car.model %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="number" name="price" value="<%= car.price %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="color">Color:</label>
+                    <input type="text" name="color" value="<%= car.color %>" required>
+                </div>
+                <button type="submit">Update</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
